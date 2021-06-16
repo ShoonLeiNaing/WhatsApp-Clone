@@ -31,7 +31,9 @@ db.once('open', () => {
             const messageDetail = change.fullDocument;
             pusher.trigger('messages','inserted',{
                 name:messageDetail.name,
-                message:messageDetail.message
+                message:messageDetail.message,
+                timestamp:messageDetail.timestamp,
+                received:messageDetail.received,
             })
         }else{
             console.log("Error triggering pusher")
@@ -41,7 +43,7 @@ db.once('open', () => {
 })
 
 //DB config
-const connection_url = 'mongodb+srv://Shoon:nXl8dMFHrJoMiDQc@cluster0.8uj7r.mongodb.net/whatsapp-backend?retryWrites=true&w=majority'
+const connection_url = 'mongodb+srv://Shoon:nXl8dMFHrJoMiDQc@cluster0.8uj7r.mongodb.net/whatsapp-backend?retryWrites=true&w=majority&ssl=true'
 mongoose.connect(connection_url, {
     useCreateIndex: true,
     useNewUrlParser: true,
